@@ -71,7 +71,7 @@ public class LoginPageTest {
     }
 
     @Test(priority = 1)
-    public void testLoginSuccessful() {
+    public void testLoginSuccessfully() {
         objLogin.loginTo(user, pass);
         Assert.assertEquals(objHome.getUserName(),"Manger Id : "+user);
         Assert.assertEquals(objHome.getAlign(),"center");
