@@ -63,7 +63,7 @@ public class LoginPageTest {
 
     @Test(priority = 0)
 
-    public void testHomeDisplayCorrect() {
+    public void testHomeDisplayCorrected() {
 
         String login = objLogin.getTitle();
         Assert.assertEquals(login, "Guru99 Bank");
