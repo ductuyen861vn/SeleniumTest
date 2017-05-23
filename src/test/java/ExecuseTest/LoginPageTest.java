@@ -15,9 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -30,8 +28,10 @@ public class LoginPageTest {
     WebDriver driver;
     Homepage objHome;
     LoginPage objLogin;
-    String user = "mngr78109";
-    String pass = "gYhYvyt";
+    public static String user = "mngr78109";
+    public static String pass = "gYhYvyt";
+
+
 
     @BeforeTest
     @Parameters("browser")
@@ -59,6 +59,8 @@ public class LoginPageTest {
 
     }
 
+
+
     @Test(priority = 0)
 
     public void testHomeDisplayCorrect() {
@@ -74,7 +76,12 @@ public class LoginPageTest {
         Assert.assertEquals(objHome.getUserName(),"Manger Id : "+user);
         Assert.assertEquals(objHome.getAlign(),"center");
         
-        driver.close();
+
+    }
+
+    @AfterTest
+    public void aftertest(){
+        driver.quit();
     }
 
 

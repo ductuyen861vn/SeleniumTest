@@ -8,20 +8,20 @@ import org.openqa.selenium.WebDriver;
  */
 public class Homepage {
 
-    WebDriver driver;
+    public static WebDriver driver;
 
 
-    By username = By.xpath("//table//tr[@class='heading3']");
+    public static By username = By.xpath("//table//tr[@class='heading3']");
 
     public Homepage(WebDriver driver) {
         this.driver = driver;
     }
 
-    public String getUserName() {
+    public static String getUserName() {
         return driver.findElement(username).getText();
     }
 
-    public String getAlign(){
+    public static String getAlign(){
         return driver.findElement(username).getAttribute("align");
     }
 }
