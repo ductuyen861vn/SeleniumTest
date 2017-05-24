@@ -2,6 +2,7 @@ package ExecuseTest;
 
 import ObjectPage.Homepage;
 import ObjectPage.LoginPage;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
@@ -23,23 +24,7 @@ public class InvalidUserTest {
     LoginPage objLogin;
 
 
-    @DataProvider(name = "userDATA")
-    public Object[][] testData() {
 
-        Object[][] data = new Object[3][2];
-
-
-        //2nd row
-        data[1][0] = "invalid";
-        data[1][1] = LoginPage.pass;
-        //3rd row
-        data[2][0] = LoginPage.user;
-        data[2][1] = "invalid";
-        //4th row
-        data[3][0] = "invalid";
-        data[3][1] = "invalid";
-        return data;
-    }
 
 
     @BeforeTest
@@ -54,20 +39,20 @@ public class InvalidUserTest {
     }
 
 
-
-
-
-    @Test(dataProvider = "userData")
-    public void passWordIncorrectly(String user, String pass){
-        objLogin.loginTo(user,pass);
-        Assert.assertEquals(LoginPage.getAlertMessenger(),LoginPage.Expect_Error_Messenger);
-        String login = LoginPage.getTitle();
-        Assert.assertEquals(login, LoginPage.pageHeader);
+    @Test
+    public void passWordIncorrectly() throws InterruptedException {
+        objLogin.loginTo("123", "321");
+        Thread.sleep(5);
+        Alert alt = driver.switchTo().alert();
+        String actualBoxMsg = alt.getText(); // get content of the Alter Message
+        System.out.print("Messenge la: "+actualBoxMsg);
+        alt.accept();
+        // Compare Error Text with Expected Error Value
+        Assert.assertEquals(actualBoxMsg, LoginPage.Expect_Error_Messenger);
     }
 
-    @AfterTest
-    public void aftertest(){
-        driver.quit();
-    }
+
 
 }
+
+

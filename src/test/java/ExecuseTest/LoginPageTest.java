@@ -28,10 +28,25 @@ public class LoginPageTest {
     WebDriver driver;
     Homepage objHome;
     LoginPage objLogin;
-    public static String user = "mngr78109";
-    public static String pass = "gYhYvyt";
 
 
+    @DataProvider(name = "userData")
+    public Object[][] testData() {
+
+        Object[][] data = new Object[3][2];
+
+        // 1st row
+        data[0][0] = LoginPage.user;
+        data[0][1] = "invalid";
+        //2nd row
+        data[1][0] = "invalid";
+        data[1][1] = LoginPage.pass;
+        //3rd row
+        data[2][0] = "invalid";
+        data[2][1] = "invalid";
+
+        return data;
+    }
 
     @BeforeTest
     @Parameters("browser")
@@ -57,7 +72,10 @@ public class LoginPageTest {
         objLogin = new LoginPage(driver);
 
 
+
     }
+
+
 
 
 
@@ -65,18 +83,24 @@ public class LoginPageTest {
 
     public void testHomeDisplayCorrected() {
 
-        String login = objLogin.getTitle();
-        Assert.assertEquals(login, "Guru99 Bank");
+        String login = LoginPage.getTitle();
+        Assert.assertEquals(login, LoginPage.pageHeader);
 
     }
 
-    @Test(priority = 1)
-    public void testLoginSuccessfully() {
-        objLogin.loginTo(user, pass);
-        Assert.assertEquals(objHome.getUserName(),"Manger Id : "+user);
+    @Test(priority = 2)
+    public void passWordCorrectly() {
+        objLogin.loginTo(LoginPage.user, LoginPage.pass);
+        Assert.assertEquals(objHome.getUserName(),"Manger Id : "+LoginPage.user);
         Assert.assertEquals(objHome.getAlign(),"center");
-        
+    }
 
+    @Test(priority = 1, dataProvider = "userData")
+    public void passWordIncorrectly(String user, String pass){
+        objLogin.loginTo(user,pass);
+        Assert.assertEquals(LoginPage.getAlertMessenger(),LoginPage.Expect_Error_Messenger);
+        String login = LoginPage.getTitle();
+        Assert.assertEquals(login, LoginPage.pageHeader);
     }
 
     @AfterTest
