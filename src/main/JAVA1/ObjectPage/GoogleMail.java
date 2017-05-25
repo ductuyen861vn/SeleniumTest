@@ -13,7 +13,7 @@ public class GoogleMail {
     public static By googleAccount = By.xpath("//div/div/a/span[@class='gb_8a gbii']");
     public static By profile = By.xpath("//div[@class='gb_tb gbip' and @title='Profile']");
     public static By openUploadImage = By.xpath("//div[@class='a-b-c d-u d-u-Q' and @role='button']");
-    public static String mainHandle;
+
 
 
     public GoogleMail(WebDriver driver) {

@@ -5,6 +5,7 @@ import ObjectPage.GoogleMail;
 import ObjectPage.Homepage;
 import ObjectPage.LoginPage;
 import org.junit.After;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,6 +14,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -57,24 +59,43 @@ public class TestUploadFileTest {
 
     @Test(priority = 1)
     public void openUploadFile() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver,10);;
-        wait.until(ExpectedConditions.visibilityOfElementLocated(GoogleMail.googleAccount));
-        GoogleMail.mainHandle = driver.getWindowHandle();
-        System.out.println(driver.getWindowHandle());
+        /*String mainHandle = driver.getWindowHandle();
+        System.out.println(driver.getWindowHandle());*/
         googleMail.clickOnGoogleAcc();
         googleMail.clickOnProfile();
+        Thread.sleep(10000);
 
-        Set<String> winHandles = driver.getWindowHandles();
-        for (String handle:winHandles){
-            if(GoogleMail.mainHandle.equalsIgnoreCase(handle)){
-                WebDriver popup = driver.switchTo().window(handle);
-            }
-        }
 
+        int size = driver.findElements(By.tagName("iframe")).size();
+        System.out.println(size);
+        /*driver.switchTo().frame();
+        googleMail.clickOpenUploadImage();*/
+
+        for(int i=0; i<=size; i++){
+            driver.switchTo().frame(i);
+            int total=driver.findElements(GoogleMail.openUploadImage).size();
+            System.out.println(total);
+            driver.switchTo().defaultContent();}
+
+
+        /*driver.switchTo().frame("I2_1495708172281");
+        googleMail.clickOpenUploadImage();*/
+
+        /*Set<String> winHandles = driver.getWindowHandles();
+        Iterator<String> it = winHandles.iterator();
         System.out.println(winHandles);
+        while (it.hasNext()){
+            String childHandle = it.next();
+            if(!mainHandle.equalsIgnoreCase(childHandle)){
+                driver.switchTo().window(childHandle);
+                ;
+            }
+        }*/
+    }
 
-
-
+    @AfterTest
+    public void quit(){
+        driver.close();
     }
 
 
