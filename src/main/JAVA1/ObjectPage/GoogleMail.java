@@ -10,8 +10,26 @@ public class GoogleMail {
 
     public WebDriver driver;
 
-    By googleAccount = By.className("gb_8a gbii");
-    By profile = By.className("gb_tb gbip");
-    By openUploadImage = By.className("a-b-c d-u d-u-Q");
+    public static By googleAccount = By.xpath("//div/div/a/span[@class='gb_8a gbii']");
+    public static By profile = By.xpath("//div[@class='gb_tb gbip' and @title='Profile']");
+    public static By openUploadImage = By.xpath("//div[@class='a-b-c d-u d-u-Q' and @role='button']");
+    public static String mainHandle;
+
+
+    public GoogleMail(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public void clickOnGoogleAcc(){
+        driver.findElement(googleAccount).click();
+    }
+
+    public void clickOnProfile(){
+        driver.findElement(profile).click();
+    }
+
+    public void clickOpenUploadImage(){
+        driver.findElement(openUploadImage).click();
+    }
 
 }
