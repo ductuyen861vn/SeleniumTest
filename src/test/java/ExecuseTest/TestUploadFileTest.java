@@ -64,18 +64,17 @@ public class TestUploadFileTest {
         googleMail.clickOnGoogleAcc();
         googleMail.clickOnProfile();
         Thread.sleep(10000);
+        driver.switchTo().frame(8);
+        googleMail.clickOpenUploadImage();
 
-
+        /*//Chay vong lap de tim nhung frame nao chua element openUploadImage
         int size = driver.findElements(By.tagName("iframe")).size();
         System.out.println(size);
-        /*driver.switchTo().frame();
-        googleMail.clickOpenUploadImage();*/
-
         for(int i=0; i<=size; i++){
             driver.switchTo().frame(i);
             int total=driver.findElements(GoogleMail.openUploadImage).size();
             System.out.println(total);
-            driver.switchTo().defaultContent();}
+            driver.switchTo().defaultContent();}*/
 
 
         /*driver.switchTo().frame("I2_1495708172281");
@@ -93,10 +92,10 @@ public class TestUploadFileTest {
         }*/
     }
 
-    @AfterTest
+    /*@AfterTest
     public void quit(){
         driver.close();
-    }
+    }*/
 
 
 
