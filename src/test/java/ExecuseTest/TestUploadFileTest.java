@@ -27,7 +27,7 @@ public class TestUploadFileTest {
     WebDriver driver;
     GoogleLogin googleLogin;
     GoogleMail googleMail;
-
+    WebDriverWait wait;
 
 
     @BeforeTest
@@ -48,7 +48,7 @@ public class TestUploadFileTest {
 
         googleLogin.inputEmail();
         googleLogin.clickNext();
-        WebDriverWait wait = new WebDriverWait(driver,10);;
+        wait = new WebDriverWait(driver,10);;
         wait.until(ExpectedConditions.visibilityOfElementLocated(GoogleLogin.password));
         googleLogin.inputPass();
         googleLogin.clickNext();
@@ -63,11 +63,13 @@ public class TestUploadFileTest {
         System.out.println(driver.getWindowHandle());*/
         googleMail.clickOnGoogleAcc();
         googleMail.clickOnProfile();
-        Thread.sleep(10000);
+        wait = new WebDriverWait(driver,10);;
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(8));
         driver.switchTo().frame(8);
         googleMail.clickOpenUploadImage();
 
-        /*//Chay vong lap de tim nhung frame nao chua element openUploadImage
+        //Chay vong lap de tim nhung frame nao chua element openUploadImage
+        /*Thread.sleep(10000);
         int size = driver.findElements(By.tagName("iframe")).size();
         System.out.println(size);
         for(int i=0; i<=size; i++){
