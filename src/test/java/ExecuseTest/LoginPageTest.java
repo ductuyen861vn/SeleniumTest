@@ -2,6 +2,7 @@ package ExecuseTest;
 
 import ObjectPage.Homepage;
 import ObjectPage.LoginPage;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -98,9 +99,13 @@ public class LoginPageTest {
     @Test(priority = 1, dataProvider = "userData")
     public void passWordIncorrectly(String user, String pass){
         objLogin.loginTo(user,pass);
+        WebDriverWait wait = new WebDriverWait(driver,10);
+        wait.until(ExpectedConditions.alertIsPresent());
         Assert.assertEquals(LoginPage.getAlertMessenger(),LoginPage.Expect_Error_Messenger);
         String login = LoginPage.getTitle();
         Assert.assertEquals(login, LoginPage.pageHeader);
+
+
     }
 
     @AfterTest
