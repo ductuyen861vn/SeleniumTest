@@ -18,8 +18,8 @@ public class LoginPage {
     public static By password = By.name("password");
     public static By login = By.name("btnLogin");
     public static By reset = By.name("btnReset");
-    public static String user = "mngr78109";
-    public static String pass = "gYhYvyt";
+    public static String user = "mngr82947";
+    public static String pass = "UdUsusa";
 
     //Expected
     public static final String Expect_Error_Messenger = "User or Password is not valid";
